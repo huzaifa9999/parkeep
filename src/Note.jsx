@@ -13,10 +13,10 @@ import "./App.css";
 var current = new Date();
 const Note = (props) => {
   const [checked, setChecked] = React.useState(true);
-  const [activeItemsCount, setActiveItemsCount] = React.useState(0);
-  const handleChange = (event) => {
-    setChecked(false);
 
+  const handleChange = () => {
+    props.setsize(props.size - 1);
+    setChecked(false);
   };
 
   const deleteNote = () => {
@@ -49,15 +49,10 @@ const Note = (props) => {
                 {current.toLocaleTimeString()}
               </TableCell>
               <TableCell align="right">
-                {checked ? null : current.toLocaleTimeString()}
+                {checked ? null : new Date().toLocaleTimeString()}
               </TableCell>
               <TableCell align="right">
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChange}
-                  state={checked? 'checked': 'unchecked'}
-                  // inputProps={{ "aria-label": "controlled" }}
-                />
+                <Checkbox checked={checked} onChange={handleChange} />
               </TableCell>
               <TableCell align="right">
                 <Button onClick={deleteNote}>

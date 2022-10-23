@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 const CreateNote = (props) => {
 
-    const [expand,setExpand]=useState(false);
 
     const [note, setNote] = useState({
         title: "",
@@ -14,12 +13,8 @@ const CreateNote = (props) => {
 
     const InputEvent = (event) => {
 
-        // const value=event.target.value;
-        // const name= event.target.name;
 
-        const { name, value } = event.target;//can also write this object destructing instead of above 2 lines
-
-        //whatever user writes name or value we get it
+        const { name, value } = event.target;
 
         setNote((prevData) => {
             return {
@@ -34,14 +29,12 @@ const CreateNote = (props) => {
         props.passNote(note);
 props.countnote(note);
         setNote({
-            title: "",
-            number: "",
+            title:"",
+            number:"",
         });
     };
 
-    const expandIt=()=>{
-        setExpand(true);
-    };
+   
 
     return (
         <>

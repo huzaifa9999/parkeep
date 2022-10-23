@@ -3,25 +3,19 @@ import Header from "./Header";
 import Footer from "./Footer";
 import CreateNote from "./CreateNote";
 import Note from "./Note";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 const App = () => {
-
+const [size,setsize]= useState(0)
   const [addItem, setAddItem] = useState([]);
-  const [c, setc] = useState(0);
   const addNote = (note) => {
     setAddItem((prevData) => {
+
       return [...prevData, note];
     });
-    console.log(note);
+setsize(size+1)
   };
 
-
-
-const totalnote=()=>{
-    setc(c+1)
-return c;
-    }
 
 
   const onDelete = (id) => {
@@ -30,17 +24,17 @@ return c;
         return index !== id;
       })
     );
-  };
+};
 
   return (
     <>
     
       <Header />
-      <div className="todo-results">
-      Done: 
+      
+      <CreateNote passNote={addNote}  />
+      <div className="parking-results">
+      No. OF Parked Cars: {size}
     </div>
-      <CreateNote passNote={addNote} countnote={totalnote} />
-
       {addItem.map((val, index) => {
         return (
           <Note
@@ -48,6 +42,8 @@ return c;
             title={val.title}
             number={val.number}
             deleteItem={onDelete}
+            setsize={setsize}
+            size={size}
           />
         );
       })}
